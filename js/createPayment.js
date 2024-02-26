@@ -14,7 +14,7 @@ const qs = require('qs');
 var setletter  = process.argv[2];
 var filiaal    = process.argv[3];
 var ordernr    = process.argv[4];
-// testen
+ 
 	   
 // Wegschrijven naar log 	
 //console.log('setletter: '  + setletter ); 
