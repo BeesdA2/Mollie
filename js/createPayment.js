@@ -107,7 +107,7 @@ async function createRequest (mollieUrl, apiToken, redirectUrl, amount, invoice,
        currency : "EUR",
        value : amount 
     },
-    description: 'Factuur/Klant/Factuur datum: ' + invoice + '/' + klnr  + '/' + invoice_dag + '.' +invoice_maand+'.'+invoice_eeuw+invoice_jaar ,
+    description: 'Factuur/Klant/F.datum: ' + invoice + '/' + klnr  + '/' + invoice_dag + '.' +invoice_maand+'.'+invoice_eeuw+invoice_jaar ,
 	
 	 redirectUrl: redirectUrl,
 	};
