@@ -5,7 +5,7 @@ const {dbconn, dbstmt} = require('idb-connector');
   return new Promise(function(resolve)
   {  
     //const sSql = 'SELECT ohsumt, ohinvn, ohcusn, ohcust, digits(ohincc) ohincc, digits(ohinyy) ohinyy, digits(ohinmm) ohinmm, digits(ohindd) ohindd from dasfp'+ setletter + '.doh where ohbran = '+ filiaal + ' and ohordn = ' + ordernr + ' with NONE';
-    const sSql = 'SELECT ohsumt, ohinvn, ohcusn, ohcust, ohincc, ohinyy, ohinmm, ohindd from dasfp'+ setletter + '.doh where ohbran = '+ filiaal + ' and ohordn = ' + ordernr + ' with NONE';
+    const sSql = 'SELECT ohsumt, ohinvn, ohcusn, ohcust from dasfp'+ setletter + '.doh where ohbran = '+ filiaal + ' and ohordn = ' + ordernr + ' with NONE';
 	
     const connection = new dbconn();
     connection.conn('*LOCAL');

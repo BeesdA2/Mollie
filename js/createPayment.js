@@ -44,10 +44,17 @@ async function handlePaymentMollie(setletter, filiaal, ordernr) {
  let amount   = resultinv ? resultinv[0].OHSUMT : [];
  let invoice  = resultinv ? resultinv[0].OHINVN : [];
  let klnr     = resultinv ? resultinv[0].OHCUST : [];
- let invoice_eeuw = resultinv ? resultinv[0].OHINCC : [];
- let invoice_jaar = resultinv ? resultinv[0].OHINYY : [];
- let invoice_maand = resultinv ? resultinv[0].OHINMM : [];
- let invoice_dag = resultinv ? resultinv[0].OHINDD : [];
+ 
+const today = new Date();
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1; // Months start at 0!
+let dd = today.getDate();
+
+if (dd < 10) dd = '0' + dd;
+if (mm < 10) mm = '0' + mm;
+
+const invoice_date = dd + '.' + mm + '.' + yyyy;
+
  let consumer = resultinv ? resultinv[0].OHCUSN.trim() : [];
  
  let name = resultbranche[0].RLFILN  ;
@@ -55,7 +62,7 @@ async function handlePaymentMollie(setletter, filiaal, ordernr) {
  //console.log('name: '+ name);
   
 // Uitvoeren webservice createPayment Mollie
- const resp3 = await createRequest(mollieUrl, apiToken, redirectUrl, amount, invoice, klnr, invoice_eeuw, invoice_jaar, invoice_maand, invoice_dag, daysValid, consumer, name);
+ const resp3 = await createRequest(mollieUrl, apiToken, redirectUrl, amount, invoice, klnr, invoice_date, daysValid, consumer, name);
  let result3 = await resp3;
  
 //console.log("antwoord webservice:" + JSON.stringify(resp3));
@@ -94,7 +101,7 @@ let qrwidth = '';
     }
 }
 
-async function createRequest (mollieUrl, apiToken, redirectUrl, amount, invoice, klnr, invoice_eeuw, invoice_jaar, invoice_maand, invoice_dag,  daysValid, consumer, name) {
+async function createRequest (mollieUrl, apiToken, redirectUrl, amount, invoice, klnr, invoice_date,  daysValid, consumer, name) {
    
 	try {
         // set the url
@@ -107,7 +114,7 @@ async function createRequest (mollieUrl, apiToken, redirectUrl, amount, invoice,
        currency : "EUR",
        value : amount 
     },
-    description: 'Factuur/Klant/F.datum: ' + invoice + '/' + klnr  + '/' + invoice_dag + '.' +invoice_maand+'.'+invoice_eeuw+invoice_jaar ,
+    description: 'Factuur/Klant/F.datum: ' + invoice + '/' + klnr  + '/' + invoice_date ,
 	
 	 redirectUrl: redirectUrl,
 	};
